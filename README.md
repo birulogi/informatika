@@ -1,1 +1,1 @@
-# informatika-kka
+# informatika
