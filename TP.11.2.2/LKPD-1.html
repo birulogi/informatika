@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LKPD 1: Detektif Algoritma - Birulogi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        @media print {
+            .no-print { display: none; }
+            body { background-color: white; padding: 0; }
+            .container { box-shadow: none; margin: 0; width: 100%; max-width: 100%; border: none; }
+            textarea, select, input { border: 1px solid #ccc !important; }
+        }
+        th, td { min-width: 120px; }
+        .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    </style>
+</head>
+<body class="bg-blue-900 min-h-screen p-2 md:p-4 font-sans text-gray-800">
+    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-2xl overflow-hidden container">
+        
+        <!-- Header -->
+        <header class="bg-blue-800 text-white p-5 md:p-6 text-center">
+            <h1 class="text-xl md:text-2xl font-bold uppercase tracking-wide">Lembar Kerja Peserta Didik (LKPD 1)</h1>
+            <p class="text-sm opacity-90">Detektif Algoritma (Strategi & Karakteristik)</p>
+        </header>
+
+        <main class="p-4 md:p-6 space-y-6">
+            <!-- Kompetensi Dasar / Tujuan -->
+            <div class="bg-emerald-50 border-l-4 border-emerald-500 p-3 rounded text-xs md:text-sm text-emerald-900">
+                <strong>Tujuan Pembelajaran:</strong> Peserta didik mampu mengidentifikasi dan membedakan strategi Brute Force, Greedy, dan Divide & Conquer dalam konteks kehidupan digital.
+            </div>
+
+            <!-- Langkah 1: Identitas Kelompok -->
+            <section class="space-y-4 bg-blue-50 p-4 rounded-lg border border-blue-100 shadow-sm">
+                <h2 class="text-blue-900 font-bold text-xs md:text-sm uppercase italic border-b border-blue-200 pb-1">Identitas Kelompok</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-blue-900 mb-1">Pilih Kelas:</label>
+                        <select id="kelas_pd" class="w-full border-2 border-blue-200 rounded-lg p-2 text-sm outline-none focus:border-blue-600 bg-white font-semibold transition-all">
+                            <option value="">-- Pilih Kelas --</option>
+                            <option value="11-1">11 - 1</option>
+                            <option value="11-2">11 - 2</option>
+                            <option value="11-5">11 - 5</option>
+                            <option value="11-6">11 - 6</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-blue-900 mb-1">Pilih Kelompok:</label>
+                        <select id="kelompok_pd" class="w-full border-2 border-blue-200 rounded-lg p-2 text-sm outline-none focus:border-blue-600 bg-white font-semibold transition-all">
+                            <option value="">-- Pilih Kelompok --</option>
+                            <script>for(let i=1;i<=6;i++) document.write(`<option value="Kelompok ${i}">Kelompok ${i}</option>`);</script>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <label class="block text-[10px] font-bold text-blue-800 uppercase mb-2">Daftar Anggota Kelompok (Input Nama):</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+                        <script>
+                            for(let i=1; i<=7; i++) {
+                                document.write(`
+                                <div class="flex items-center gap-2 bg-white p-1 rounded border border-blue-100">
+                                    <span class="text-[10px] font-bold text-blue-700 w-3">${i}</span>
+                                    <input type="text" id="agt_${i}" oninput="syncNamesToRoles()" placeholder="Nama Peserta" class="w-full p-1 text-xs outline-none bg-transparent">
+                                </div>
+                                `);
+                            }
+                        </script>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Aktivitas 1: Tabel Tebak Skenario -->
+            <section class="space-y-3">
+                <h2 class="text-blue-900 font-bold text-xs md:text-sm uppercase border-l-4 border-blue-800 pl-2">Aktivitas 1: Tebak Strategi</h2>
+                <p class="text-xs text-gray-500 italic">Hubungkan skenario media sosial di bawah ini dengan strategi pemecahan masalah yang tepat!</p>
+                <div class="table-responsive border rounded-lg">
+                    <table class="w-full border-collapse text-xs md:text-sm">
+                        <thead>
+                            <tr class="bg-gray-100 text-blue-900 border-b text-center">
+                                <th class="p-2 border-r w-1/12">No</th>
+                                <th class="p-2 border-r w-7/12 text-left">Skenario Realita Media Sosial</th>
+                                <th class="p-2 border-r w-4/12">Pilihan Strategi Pembelajaran</th>
+                                <th class="p-2 w-2/12">Pelaksana Analisis</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <!-- Baris 1 -->
+                            <tr>
+                                <td class="p-3 text-center font-bold bg-gray-50 border-r">1</td>
+                                <td class="p-3 border-r leading-relaxed">
+                                    Mencari teman di daftar <em>followers</em> dengan mengecek satu per satu dari atas sampai bawah tanpa terlewat.
+                                </td>
+                                <td class="p-2 border-r">
+                                    <select id="strat_1" class="w-full p-1.5 border rounded text-xs bg-white outline-none focus:border-blue-500 font-semibold">
+                                        <option value="">-- Pilih Strategi --</option>
+                                        <option value="Greedy">Greedy</option>
+                                        <option value="Divide & Conquer">Divide & Conquer</option>
+                                        <option value="Brute Force">Brute Force</option>
+                                    </select>
+                                </td>
+                                <td class="p-2">
+                                    <select id="rep_1" class="w-full border border-blue-200 p-1 rounded text-[10px] bg-white outline-none select-peran"></select>
+                                </td>
+                            </tr>
+                            <!-- Baris 2 -->
+                            <tr>
+                                <td class="p-3 text-center font-bold bg-gray-50 border-r">2</td>
+                                <td class="p-3 border-r leading-relaxed">
+                                    Menampilkan daftar video "Trending" hanya berdasarkan acuan jumlah <em>likes</em> terbanyak saat ini.
+                                </td>
+                                <td class="p-2 border-r">
+                                    <select id="strat_2" class="w-full p-1.5 border rounded text-xs bg-white outline-none focus:border-blue-500 font-semibold">
+                                        <option value="">-- Pilih Strategi --</option>
+                                        <option value="Greedy">Greedy</option>
+                                        <option value="Divide & Conquer">Divide & Conquer</option>
+                                        <option value="Brute Force">Brute Force</option>
+                                    </select>
+                                </td>
+                                <td class="p-2">
+                                    <select id="rep_2" class="w-full border border-blue-200 p-1 rounded text-[10px] bg-white outline-none select-peran"></select>
+                                </td>
+                            </tr>
+                            <!-- Baris 3 -->
+                            <tr>
+                                <td class="p-3 text-center font-bold bg-gray-50 border-r">3</td>
+                                <td class="p-3 border-r leading-relaxed">
+                                    Membuat struktur pohon komentar yang memiliki balasan, lalu di dalam balasan tersebut punya susunan balasan lagi (berjenjang).
+                                </td>
+                                <td class="p-2 border-r">
+                                    <select id="strat_3" class="w-full p-1.5 border rounded text-xs bg-white outline-none focus:border-blue-500 font-semibold">
+                                        <option value="">-- Pilih Strategi --</option>
+                                        <option value="Greedy">Greedy</option>
+                                        <option value="Divide & Conquer">Divide & Conquer</option>
+                                        <option value="Brute Force">Brute Force</option>
+                                    </select>
+                                </td>
+                                <td class="p-2">
+                                    <select id="rep_3" class="w-full border border-blue-200 p-1 rounded text-[10px] bg-white outline-none select-peran"></select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Aktivitas 2: Analisis Teks Rumpang -->
+            <section class="space-y-4">
+                <h2 class="text-sm font-bold text-blue-800 border-l-4 border-blue-800 pl-2 uppercase">Aktivitas 2: Analisis Karakteristik Cepat</h2>
+                <p class="text-xs text-gray-500 italic">Lengkapi bagian rumpang di bawah ini dengan mengetikkan opsi kata pilihan: <strong>(Lambat / Cepat / Akurat / Rakus)</strong></p>
+                
+                <div class="grid grid-cols-1 gap-3 text-xs md:text-sm">
+                    <div class="p-4 border rounded-lg bg-gray-50 leading-loose">
+                        <strong>Paragraf Analisis Pola A:</strong><br>
+                        Brute Force itu sangat 
+                        <input type="text" id="rump_1" placeholder="..." class="border-b-2 border-blue-400 bg-transparent text-center font-bold outline-none w-24 text-blue-800 focus:border-blue-700"> 
+                        karena mengecek semua kemungkinan tanpa pengecualian, tetapi keunggulannya hasil akhir yang diperoleh pasti 
+                        <input type="text" id="rump_2" placeholder="..." class="border-b-2 border-blue-400 bg-transparent text-center font-bold outline-none w-24 text-blue-800 focus:border-blue-700">.
+                    </div>
+
+                    <div class="p-4 border rounded-lg bg-gray-50 leading-loose">
+                        <strong>Paragraf Analisis Pola B:</strong><br>
+                        Greedy seringkali disebut sebagai strategi yang 
+                        <input type="text" id="rump_3" placeholder="..." class="border-b-2 border-blue-400 bg-transparent text-center font-bold outline-none w-24 text-blue-800 focus:border-blue-700"> 
+                        karena prinsip utamanya hanya mengambil hasil terbesar/terbaik lokal saat ini agar durasi komputasi prosesnya berjalan secara 
+                        <input type="text" id="rump_4" placeholder="..." class="border-b-2 border-blue-400 bg-transparent text-center font-bold outline-none w-24 text-blue-800 focus:border-blue-700">.
+                    </div>
+                </div>
+                <div class="text-[11px] bg-amber-50 text-amber-800 p-2.5 rounded border border-amber-200">
+                    💡 <strong>Wawasan Teknis:</strong> Ingat bahwa strategi <em>Divide & Conquer</em> memecah masalah berskala besar menjadi bagian-bagian subsistem terkecil terlebih dahulu agar alur manajemen data lebih mudah dikelola secara komputasional.
+                </div>
+            </section>
+
+            <!-- Tombol Pengoperasian -->
+            <section class="flex flex-wrap gap-4 justify-center pt-4 no-print">
+                <button onclick="simpanLokal()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all active:scale-95 text-sm">
+                    Simpan Progres Kelompok
+                </button>
+                <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all active:scale-95 text-sm">
+                    Cetak Halaman / Ekspor PDF
+                </button>
+            </section>
+        </main>
+
+        <footer class="bg-gray-100 text-center p-4 text-[10px] text-gray-500 border-t">
+            &copy; 2026 birulogi. Semua Hak Dilindungi.
+        </footer>
+    </div>
+
+    <script>
+        function syncNamesToRoles() {
+            const selects = document.querySelectorAll('.select-peran');
+            const currentValues = Array.from(selects).map(s => s.value);
+            
+            selects.forEach((select, idx) => {
+                const prevValue = currentValues[idx];
+                select.innerHTML = '<option value="">-- Pilih Pelaksana --</option>';
+                
+                for(let i=1; i<=7; i++) {
+                    const nama = document.getElementById(`agt_${i}`).value;
+                    if(nama.trim() !== "") {
+                        const option = document.createElement('option');
+                        option.value = nama;
+                        option.textContent = nama;
+                        select.appendChild(option);
+                    }
+                }
+                select.value = prevValue;
+            });
+        }
+
+        function simpanLokal() {
+            const data = {
+                kelas: document.getElementById('kelas_pd').value,
+                kelompok: document.getElementById('kelompok_pd').value,
+                agt: Array.from({length: 7}, (_, i) => document.getElementById(`agt_${i+1}`).value),
+                rump: [1,2,3,4].map(id => document.getElementById(`rump_${id}`).value),
+                rows: [1, 2, 3].map(id => ({
+                    strat: document.getElementById(`strat_${id}`).value,
+                    rep: document.getElementById(`rep_${id}`).value
+                }))
+            };
+            localStorage.setItem('lkpd1_detektif_algoritma_data', JSON.stringify(data));
+            Swal.fire({ 
+                icon: 'success', 
+                title: 'Data Berhasil Disimpan!', 
+                text: 'Progres analisis LKPD 1 aman tersimpan di browser ini.', 
+                confirmButtonColor: '#1e40af' 
+            });
+        }
+
+        window.onload = () => {
+            const s = JSON.parse(localStorage.getItem('lkpd1_detektif_algoritma_data'));
+            if (s) {
+                document.getElementById('kelas_pd').value = s.kelas || '';
+                document.getElementById('kelompok_pd').value = s.kelompok || '';
+                s.agt.forEach((v, i) => document.getElementById(`agt_${i+1}`).value = v || '');
+                syncNamesToRoles();
+                s.rump.forEach((v, i) => document.getElementById(`rump_${i+1}`).value = v || '');
+                s.rows.forEach((r, i) => {
+                    const id = i + 1;
+                    if(document.getElementById(`strat_${id}`)) document.getElementById(`strat_${id}`).value = r.strat || '';
+                    if(document.getElementById(`rep_${id}`)) document.getElementById(`rep_${id}`).value = r.rep || '';
+                });
+            }
+        };
+    </script>
+</body>
+</html>
