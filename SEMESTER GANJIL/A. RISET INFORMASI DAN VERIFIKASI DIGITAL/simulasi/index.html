@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Simulasi Literasi Digital</title>
+<meta name="theme-color" content="#111827">
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:linear-gradient(135deg,#111827,#1f2937);color:#fff;min-height:100vh
+}
+.wrap{width:min(1100px,92%);margin:auto;padding:45px 0}
+.hero{text-align:center;margin-bottom:32px}
+.badge{display:inline-block;background:#fbbf24;color:#111;padding:7px 13px;border-radius:999px;font-size:12px;font-weight:800}
+h1{font-size:clamp(30px,6vw,54px);margin:15px 0 8px}
+.hero p{color:#d1d5db;max-width:720px;margin:auto;line-height:1.6}
+.grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px
+}
+.card{
+  position:relative;overflow:hidden;background:#fff;color:#111827;border-radius:22px;
+  padding:25px;min-height:225px;box-shadow:0 20px 50px rgba(0,0,0,.25)
+}
+.card:nth-child(1){border-top:7px solid #2563eb}
+.card:nth-child(2){border-top:7px solid #16a34a}
+.card:nth-child(3){border-top:7px solid #7c2d12}
+.card:nth-child(4){border-top:7px solid #f97316}
+.icon{font-size:40px}
+h2{margin:8px 0;font-size:24px}
+.card p{color:#4b5563;line-height:1.5;min-height:48px}
+.open{
+  display:inline-block;text-decoration:none;background:#111827;color:white;
+  padding:11px 18px;border-radius:11px;font-weight:800
+}
+.notice{
+  margin-top:25px;padding:18px;background:#fef3c7;color:#78350f;
+  border:1px solid #f59e0b;border-radius:16px;line-height:1.55;font-size:14px
+}
+.footer{text-align:center;color:#9ca3af;font-size:12px;margin-top:30px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.wrap{padding:28px 0}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <section class="hero">
+    <span class="badge">MATERI AJAR • LITERASI DIGITAL</span>
+    <h1>🔎 Pilih Simulasi</h1>
+    <p>
+      Empat contoh halaman promosi untuk latihan mengenali klaim, ajakan,
+      permintaan data pribadi, dan keamanan formulir di internet.
+    </p>
+  </section>
+
+  <section class="grid">
+    <article class="card">
+      <div class="icon">⚽</div>
+      <h2>Persib vs Persija</h2>
+      <p>Simulasi promosi pertandingan dan formulir tiket.</p>
+      <a class="open" href="01_persib_vs_persija.html">Buka Simulasi →</a>
+    </article>
+
+    <article class="card">
+      <div class="icon">🏥</div>
+      <h2>RSHS & BPJS</h2>
+      <p>Simulasi informasi layanan kesehatan dan formulir.</p>
+      <a class="open" href="02_rshs_bpjs.html">Buka Simulasi →</a>
+    </article>
+
+    <article class="card">
+      <div class="icon">☕</div>
+      <h2>Kopi Kenangan</h2>
+      <p>Simulasi promo minuman dan ajakan mengisi data.</p>
+      <a class="open" href="03_kopi_kenangan.html">Buka Simulasi →</a>
+    </article>
+
+    <article class="card">
+      <div class="icon">🍩</div>
+      <h2>J.CO Donat</h2>
+      <p>Simulasi promo hadiah dan formulir data pengguna.</p>
+      <a class="open" href="04_jco_donat.html">Buka Simulasi →</a>
+    </article>
+  </section>
+
+  <div class="notice">
+    <b>⚠️ Catatan pembelajaran:</b> semua formulir pada halaman simulasi
+    ditujukan untuk latihan. Gunakan hanya data fiktif. Jangan memasukkan
+    password akun, nomor HP, alamat rumah, atau identitas asli.
+  </div>
+
+  <div class="footer">Simulasi Literasi Digital • Berjalan langsung di browser</div>
+</main>
+</body>
+</html>
