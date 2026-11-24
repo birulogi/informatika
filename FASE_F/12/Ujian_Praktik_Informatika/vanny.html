@@ -1,1 +1,339 @@
+<!DOCTYPE HTML>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Profil - KEJAR 1 12_1</title>
+  <link href="https://googleapis.com" rel="stylesheet">
+  <style>
+    :root {
+      --sky-top: #a2d9f5;
+      --sky-bottom: #e8f5e9;
+      --grass-green: #5a8f69;
+      --forest-dark: #2d4c3b;
+      --cream-paper: #fdfaf1;
+      --wood-border: #c5b38a;
+      --sun-gold: #e6a15c;
+      --error-red: #c94a4a;
+      --doc-blue: #4285f4;
+      --slide-yellow: #f4b400;
+      --sheet-green: #0f9d58;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(180deg, var(--sky-top) 0%, #d4effc 45%, var(--sky-bottom) 100%);
+      color: var(--forest-dark);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .card-box {
+      background-color: var(--cream-paper);
+      border: 2px solid var(--wood-border);
+      border-radius: 24px;
+      padding: 32px 28px;
+      width: 100%;
+      max-width: 430px;
+      text-align: center;
+      box-shadow: 0 12px 28px rgba(45, 76, 59, 0.15);
+    }
+
+    .ornament {
+      display: inline-block;
+      background-color: #eef6ef;
+      color: var(--grass-green);
+      padding: 4px 16px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      letter-spacing: 3px;
+    }
+
+    h2 {
+      font-family: 'Lora', serif;
+      font-size: 1.6rem;
+      margin-bottom: 16px;
+      color: var(--forest-dark);
+    }
+
+    .avatar {
+      border-radius: 14px;
+      border: 4px solid #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      margin: 0 auto 18px auto;
+      display: block;
+    }
+
+    /* Form Login */
+    .input-group {
+      text-align: left;
+      margin-bottom: 14px;
+    }
+
+    .input-group label {
+      display: block;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 2px solid var(--wood-border);
+      border-radius: 12px;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.95rem;
+      background-color: #ffffff;
+      outline: none;
+    }
+
+    .input-group input:focus {
+      border-color: var(--grass-green);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 11px;
+      border: none;
+      border-radius: 25px;
+      background-color: var(--grass-green);
+      color: #ffffff;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 8px;
+      box-shadow: 0 4px 10px rgba(90, 143, 105, 0.3);
+      transition: background-color 0.25s ease;
+    }
+
+    .btn:hover {
+      background-color: var(--sun-gold);
+    }
+
+    .btn-logout {
+      background-color: #8c7a6b;
+      margin-top: 14px;
+    }
+
+    .btn-logout:hover {
+      background-color: var(--error-red);
+    }
+
+    /* Kotak Notifikasi Error */
+    .notif-error {
+      display: none;
+      background-color: #fdecea;
+      color: var(--error-red);
+      border: 1px solid #f5c6cb;
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 18px;
+      font-size: 0.9rem;
+      color: var(--grass-green);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Bagian Halaman Profil */
+    #profileSection {
+      display: none;
+    }
+
+    .biodata-box {
+      background-color: #ffffff;
+      border: 1px dashed var(--grass-green);
+      border-radius: 14px;
+      padding: 12px 14px;
+      text-align: left;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    /* Daftar Tombol Link Tugas Google */
+    .task-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .task-title {
+      font-family: 'Lora', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--forest-dark);
+      margin-bottom: 4px;
+      text-align: left;
+    }
+
+    .doc-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      padding: 11px 16px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 0.93rem;
+      color: #ffffff;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .doc-btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.92;
+    }
+
+    .btn-gdoc {
+      background-color: var(--doc-blue);
+    }
+
+    .btn-gslide {
+      background-color: #e09f1f;
+    }
+
+    .btn-gsheet {
+      background-color: var(--sheet-green);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BAGIAN 1: FORM LOGIN -->
+  <div class="card-box" id="loginSection">
+    <span class="ornament">🌱 🍃 ✨</span>
+    <h2 id="loginTitle">Login Mutia</h2>
+    <img id="loginPhoto" class="avatar" src="https://google.com" alt="Foto Profil" style="max-width: 100%; height: auto;">
+
+    <!-- Notifikasi Jika Salah -->
+    <div class="notif-error" id="notifBox">
+      ⚠️ Username atau password salah! Silakan coba lagi.
+    </div>
+
+    <form id="loginForm">
+      <div class="input-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Masukkan username..." required>
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Masukkan password..." required>
+      </div>
+      <button type="submit" class="btn">✦ Masuk ke Profil ✦</button>
+    </form>
+
+    <a href="index.html" class="back-link">← Kembali ke Daftar Anggota</a>
+  </div>
+
+  <!-- BAGIAN 2: HALAMAN PROFIL & LINK DOKUMEN -->
+  <div class="card-box" id="profileSection">
+    <span class="ornament">🌿 🌸 ✨</span>
+    <h2 id="profileName">Profil Mutia</h2>
+    <img id="profilePhoto" class="avatar" src="https://google.com" alt="Foto Profil" style="max-width: 100%; height: auto;">
+
+    <div class="biodata-box">
+      <p><strong>Kelas:</strong> XII - 1 (KEJAR 1)</p>
+      <p><strong>Mata Pelajaran:</strong> Informatika</p>
+      <p><strong>Status:</strong> Berhasil Login ✅</p>
+    </div>
+
+    <!-- 3 Link Dokumen Google -->
+    <div class="task-links">
+      <div class="task-title">📂 Berkas Ujian Praktik:</div>
+
+      <a id="linkGDoc" href="#" target="_blank" class="doc-btn btn-gdoc">
+        📄 1. G-Doc Surat Lamaran Kerja
+      </a>
+
+      <a id="linkGSlide" href="#" target="_blank" class="doc-btn btn-gslide">
+        🎞️ 2. G-Slide Curriculum Vitae (CV)
+      </a>
+
+      <a id="linkGSheet" href="#" target="_blank" class="doc-btn btn-gsheet">
+        📊 3. G-Sheet Tabel Data
+      </a>
+    </div>
+
+    <button type="button" class="btn btn-logout" onclick="logout()">Keluar (Logout)</button>
+    <a href="index.html" class="back-link">← Kembali ke Halaman Utama</a>
+  </div>
+
+  <script>
+    // ====================================================
+    // KONFIGURASI DATA & LINK MURID (EDIT SESUAI ANGGOTA)
+    // ====================================================
+    const namaMurid     = "Vanny";
+    const userBenar     = "vanny";
+    const passBenar     = "ciimutkyut";
+    const linkFotoDrive = "https://google.com";
+
+    // Masukkan URL Google Docs, Slides, dan Sheets masing-masing di bawah ini:
+    const urlSuratLamaran = "https://google.com";
+    const urlSlideCV      = "https://google.com";
+    const urlSheetTabel   = "https://google.com";
+
+    // ====================================================
+    // OTOMATISASI TAMPILAN & LOGIN
+    // ====================================================
+    document.getElementById("loginTitle").textContent  = "Login " + namaMurid;
+    document.getElementById("profileName").textContent = "Profil " + namaMurid;
+    document.getElementById("loginPhoto").src          = linkFotoDrive;
+    document.getElementById("profilePhoto").src        = linkFotoDrive;
+
+    document.getElementById("linkGDoc").href   = urlSuratLamaran;
+    document.getElementById("linkGSlide").href = urlSlideCV;
+    document.getElementById("linkGSheet").href = urlSheetTabel;
+
+    const loginForm = document.getElementById("loginForm");
+    const notifBox  = document.getElementById("notifBox");
+
+    loginForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const inputUser = document.getElementById("username").value.trim();
+      const inputPass = document.getElementById("password").value.trim();
+
+      if (inputUser === userBenar && inputPass === passBenar) {
+        notifBox.style.display = "none";
+        document.getElementById("loginSection").style.display   = "none";
+        document.getElementById("profileSection").style.display = "block";
+      } else {
+        notifBox.style.display = "block";
+      }
+    });
+
+    function logout() {
+      document.getElementById("username").value = "";
+      document.getElementById("password").value = "";
+      document.getElementById("profileSection").style.display = "none";
+      document.getElementById("loginSection").style.display   = "block";
+    }
+  </script>
+
+</body>
+</html>
 
